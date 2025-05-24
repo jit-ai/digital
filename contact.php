@@ -1,5 +1,45 @@
 <?php include 'header.php'; ?>
-      
+
+<?php 
+$msg = "";
+$error = "";
+if(isset($_POST['submit'])) {
+    print_r($_POST);
+    $to = 'jit.jitendra008@gmail.com';
+    $subject = 'Binschema Software Request For quote';
+
+    $headers = "From: " . strip_tags($_POST['email']) . "\r\n";
+    $headers .= "Reply-To: " . strip_tags($_POST['email']) . "\r\n";
+    $headers .= "CC: jit.jitendra008@gmail.com\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+    $message = '<html><body>';
+    $message .= '<img src="http://binschema.com/img/binschema_title.jpg" alt="Binschema software" style="width: 50%;" />';
+    $message .= '<table rules="all" style="border-color: #666;border:1px solid" cellpadding="10">';
+    $message .= "<tr style='background: #eee;'><td><strong>Full Name:</strong> </td><td>" . strip_tags($_POST['fname']) . "</td></tr>";
+    $message .= "<tr><td><strong>Email:</strong> </td><td>" . strip_tags($_POST['email']) . "</td></tr>";
+    $message .= "<tr><td><strong>Phone:</strong> </td><td>" . $_POST['phone'] . "</td></tr>";
+    $message .= "<tr><td><strong>Service:</strong> </td><td>" . $_POST['services'] . "</td></tr>";
+    $message .= "<tr><td><strong>Subject:</strong> </td><td>" . $_POST['subject'] . "</td></tr>";
+    $message .= "<tr><td><strong>Message:</strong> </td><td>" . $_POST['message'] . "</td></tr>";
+    $message .= "</table>";
+    $message .= "</body></html>";
+
+    if (mail($to, $subject, $message, $headers)) {
+        $msg = "Your details have been sent. A representative will be in touch soon.";
+    } else {
+        $error = "Mail not sent. Please try again later.";
+    }
+}
+?>
+
+<!-- ✅ Success message display -->
+<?php if (!empty($msg)) : ?>
+    <p class="nkmail" style="color: green; font-weight: bold; text-align:center;"><?php echo $msg; ?></p>
+<?php elseif (!empty($error)) : ?>
+    <p class="nkmail" style="color: red; font-weight: bold; text-align:center;"><?php echo $error; ?></p>
+<?php endif; ?>
 
         <!-- Contact-form-wrapper starts
     ======================================= -->
@@ -10,33 +50,37 @@
                         <div class="contact-wrapper contact-page-form-wrapper">
                             <div class="form-wrapper">
                                 <h3>Send Us a Message</h3>
-                                <form class="contact-form" method="post">
-                                    <div class="row">
-                                        <div class="col-md-12 col-lg-6">
-                                            <input type="text" name="fname" placeholder="Full Name">
-                                        </div>
+                               <form class="contact-form" method="post">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6">
+                                    <input type="text" name="fname" placeholder="Full Name" required>
+                                </div>
 
-                                        <div class="col-md-12 col-lg-6">
-                                            <input type="email" name="email" placeholder="Email">
-                                        </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <input type="email" name="email" placeholder="Email" required>
+                                </div>
 
-                                        <div class="col-md-12 col-lg-6">
-                                            <input type="text" name="phone" placeholder="Phone">
-                                        </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <input type="text" name="phone" placeholder="Phone">
+                                </div>
 
-                                        <div class="col-md-12 col-lg-6">
-                                            <input type="text" name="website" placeholder="Website">
-                                        </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <input type="text" name="services" placeholder="Services">
+                                </div>
 
-                                        <div class="col-md-12">
-                                            <textarea name="message" placeholder="Message"></textarea>
-                                        </div>
-                                        <div class="btn-wrapper">
-                                            <button type="submit" class="custom-btn btn-big grad-style-ef">CONTACT US NOW</button>
-                                        </div>
-                                    </div>
-                                    <!-- End of .row -->
-                                </form>
+                                <div class="col-md-12">
+                                    <input type="text" name="subject" placeholder="Subject">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <textarea name="message" placeholder="Message"></textarea>
+                                </div>
+
+                                <div class="btn-wrapper">
+                                    <button type="submit" name="submit" class="custom-btn btn-big grad-style-ef">CONTACT US NOW</button>
+                                </div>
+                            </div>
+                        </form>
                                 <!-- End of .contact-form -->
                             </div>
                             <!-- End of .form-wrapper -->
@@ -181,3 +225,12 @@
   margin-top: 115px !important;
 }
 </style>
+
+<!-- ✅ Reset Form After Successful Submission -->
+<?php if (!empty($msg)) : ?>
+<script>
+    setTimeout(function () {
+        document.querySelector('.contact-form').reset();
+    }, 100);
+</script>
+<?php endif; ?>

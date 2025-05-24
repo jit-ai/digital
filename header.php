@@ -46,7 +46,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" style="color:#000"; <?php echo ($currentPage == 'index.php') ? 'active' : ''; ?> href="index">
-                <img src="images/brand-logo.png" alt="Brand Logo" class="img-fluid" style="height:60px ;"><span style="font-size:24px;">Leading <br>Digital<br> Performance</span>
+                <img src="images/brand-logo.png" alt="Brand Logo" class="img-fluid" style="height:60px ;"><span class="text-logo">Leading <br>Digital<br> Performance</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -69,7 +69,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                         <a class="nav-link <?php echo ($currentPage == 'about-us.php') ? 'active' : ''; ?>" href="about-us">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link custom-btn btn-mid grad-style-cd <?php echo ($currentPage == 'contact.php') ? 'active' : ''; ?>" href="contact">Contact Us</a>
+                        <a class="nav-link custom-btn btn-mid grad-style-cd <?php echo ($currentPage == 'contact.php') ? '' : ''; ?>" href="contact">Contact Us</a>
                     </li>
                 </ul>
 
@@ -80,3 +80,11 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <!-- End of .container -->
     </nav>
     <!-- End of .navbar -->
+     <style>
+        .text-logo{
+                font-size: 24px;
+    line-height: 22px;
+    font-weight: 500;
+    margin-left: 2px;
+        }
+     </style>

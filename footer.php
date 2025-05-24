@@ -29,9 +29,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
-                        <a href="index.html" class="footer-logo">
-                            <img src="images/footer-logo.png" alt="footer logo">
-                        </a>
+                        <!-- <a href="index.html" class="footer-logo"> -->
+                        <a class="navbar-brand d-flex align-items-center" style="color:#fff"; <?php echo ($currentPage == 'index.php') ? 'active' : ''; ?> href="index">
+                <img src="images/brand-logo.png" alt="Brand Logo" class="img-fluid" style="height:60px ;"><span class="text-logo">Leading <br>Digital<br> Performance</span>
+            </a>
+                       
 
                         <ul class="social-icons">
                             <li>
